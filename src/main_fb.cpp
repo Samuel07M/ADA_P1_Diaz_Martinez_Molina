@@ -79,7 +79,7 @@ static void imprimirFila(const std::string& instancia,
 
 int main() {
     std::cout << "=== Modulo FB - Fuerza Bruta ===\n";
-    std::cout << "Semilla del equipo (Diaz, Martinez, Molina): " << SEMILLA << "\n\n";
+    std::cout << "Semilla del equipo: " << SEMILLA << "\n\n";
 
     std::vector<Instancia> instancias;
 
