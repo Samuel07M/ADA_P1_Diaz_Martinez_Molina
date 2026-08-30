@@ -77,7 +77,7 @@ static void imprimirFila(const std::string& instancia,
                << "\n";
 }
 
-int main() {
+void runFB() {
     std::cout << "=== Modulo FB - Fuerza Bruta ===\n";
     std::cout << "Semilla del equipo: " << SEMILLA << "\n\n";
 
@@ -143,6 +143,4 @@ int main() {
     std::cout << "Diccionario   -> encontradas: " << encontradasDicc
                << "/" << instancias.size()
                << " | candidatos evaluados (suma): " << totalCandidatosDicc << "\n";
-
-    return 0;
 }

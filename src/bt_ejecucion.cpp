@@ -82,10 +82,7 @@ static void escribirCSV(std::ofstream& csv, const Resultado& r) {
         << r.horasEstimadasPeorCaso << "\n";
 }
 
-int main(int argc, char** argv) {
-    long long maxNodes = 50000000LL;
-    if (argc > 1) maxNodes = std::atoll(argv[1]);
-
+void runBT(long long maxNodes) {
     std::vector<char> alphabet = buildAlphabet();
     std::cout << "Tamano del alfabeto: " << alphabet.size() << " simbolos\n";
     std::cout << "Limite de nodos por corrida: " << maxNodes << "\n\n";
@@ -128,5 +125,4 @@ int main(int argc, char** argv) {
 
     csv.close();
     std::cout << "Resultados guardados en results_bt.csv\n";
-    return 0;
 }
