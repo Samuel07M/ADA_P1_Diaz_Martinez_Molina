@@ -38,8 +38,9 @@ static Resultado correrInstancia(const std::vector<char>& alphabet, const Instan
 
 static void imprimir(const Resultado& r) {
     const auto& inst = r.inst;
+    std::cout << inst.nombre 
               << " | n=" << inst.n
-              << "  minL=" << inst.policy.minLower << " minU=" << inst.policy.minUpper
+              << " minL=" << inst.policy.minLower << " minU=" << inst.policy.minUpper
               << " minD=" << inst.policy.minDigit << " minS=" << inst.policy.minSymbol << "\n";
 
     if (r.conPoda.nodeLimitReached) {
