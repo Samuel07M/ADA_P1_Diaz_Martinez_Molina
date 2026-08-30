@@ -9,11 +9,7 @@
 #include <fstream>
 #include <algorithm>
 
-// Apellidos del equipo. La semilla NO se hardcodea: se calcula en tiempo
-// de ejecucion siguiendo el procedimiento reproducible de la Seccion 9.1
-// (ordenar alfabeticamente, concatenar en minusculas sin tildes, sumar
-// codigos ASCII mod 100000), usando el modulo compartido src/semilla.*
-// (el mismo que usa bt_ejecucion.cpp y que verifica tests/verificar_semilla.cpp).
+
 static const std::vector<std::string> APELLIDOS = {"Martinez", "Molina", "Diaz"};
 static const uint64_t SEMILLA = semilla::calcularSemilla(APELLIDOS);
 
@@ -26,16 +22,7 @@ static const int A2_MIN_LEN = 3, A2_MAX_LEN = 5;
 static const std::string REF_PASSWORD_INFO = "abc12";
 static const std::string REF_HASH = fb::sha256Hex("abc12");
 
-// Namespace anonimo: Instancia es un nombre de tipo global (no "static",
-// porque los tipos no pueden serlo) que bt_ejecucion.cpp tambien declara
-// con un layout distinto (otros campos). Al enlazarse ambos archivos en
-// un unico ejecutable (src/main.cpp), sin namespace anonimo el compilador
-// fusiona el destructor implicito de Instancia entre las dos definiciones
-// (mismo nombre mangled, distinto layout) -- violacion de la regla de
-// una sola definicion (ODR) que corrompe memoria en tiempo de ejecucion
-// (se detecto con un segfault dentro de ~Instancia() al correr el menu
-// con la opcion 2, y se confirmo con AddressSanitizer). El namespace
-// anonimo le da enlace interno al tipo y elimina la colision.
+
 namespace {
 
 struct Instancia {

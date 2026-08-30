@@ -37,14 +37,7 @@ public:
     }
     template <typename RaIt>
     void process(RaIt first, RaIt last) {
-        // OJO: `std::distance(first, last)` calculado DESPUES de este bucle
-        // siempre da 0, porque el bucle ya avanzo `first` hasta que quedo
-        // igual a `last` (esa era la condicion de parada). Con eso,
-        // data_length_ nunca se incrementaba y finish() terminaba
-        // codificando una longitud de 0 bits para cualquier entrada no
-        // vacia, corrompiendo el hash de todo mensaje no vacio (se
-        // detecto porque sha256Hex("abc") no coincidia con `sha256sum`).
-        // Se cuenta cada byte procesado dentro del propio bucle en su lugar.
+      
         for (; first != last; ++first) {
             buffer_[buffer_length_++] = static_cast<byte>(*first);
             ++data_length_;
@@ -63,12 +56,7 @@ public:
             buffer_length_ = 0;
         }
         while (buffer_length_ < 56) buffer_[buffer_length_++] = 0x00;
-        // El campo de longitud del padding de SHA-256 es de 64 bits
-        // (big-endian). Usar word32 (32 bits) aqui y desplazarlo hasta 56
-        // posiciones es comportamiento indefinido en C++ (desplazar un
-        // entero de 32 bits por >=32 posiciones) y corrompia el hash de
-        // cualquier entrada no vacia: se usa un entero de 64 bits para
-        // poder representar y desplazar la longitud completa sin UB.
+      
         unsigned long long bit_len = static_cast<unsigned long long>(data_length_) * 8ULL;
         for (int i = 0; i < 8; ++i) buffer_[56 + i] = static_cast<byte>(bit_len >> ((7 - i) * 8));
         transform();

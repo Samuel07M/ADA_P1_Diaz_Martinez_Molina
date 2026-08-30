@@ -9,23 +9,11 @@
 #include <cstdlib>
 #include <algorithm>
 
-// Mismos apellidos y mismo procedimiento de calculo de semilla que
-// fb_ejecucion.cpp (ver src/semilla.hpp) -- ambos modulos comparten una
-// unica fuente de verdad para la semilla del equipo, en vez de cada uno
-// hardcodear su propio valor por separado.
+
 static const std::vector<std::string> APELLIDOS = {"Martinez", "Molina", "Diaz"};
 static const uint64_t SEMILLA = semilla::calcularSemilla(APELLIDOS);
 
-// Namespace anonimo: Instancia es un nombre de tipo global (no "static",
-// porque los tipos no pueden serlo) que fb_ejecucion.cpp tambien declara
-// con un layout distinto (otros campos). Al enlazarse ambos archivos en
-// un unico ejecutable (src/main.cpp), sin namespace anonimo el compilador
-// fusiona el destructor implicito de Instancia entre las dos definiciones
-// (mismo nombre mangled, distinto layout) -- violacion de la regla de
-// una sola definicion (ODR) que corrompe memoria en tiempo de ejecucion
-// (se detecto con un segfault dentro de ~Instancia() al correr el menu
-// con la opcion 2, y se confirmo con AddressSanitizer). El namespace
-// anonimo le da enlace interno al tipo y elimina la colision.
+
 namespace {
 
 struct Instancia {
@@ -134,9 +122,7 @@ void runBT(long long maxNodes) {
         << " minUpper=" << params.minUpper << " minDigit=" << params.minDigit
         << " minSymbol=" << params.minSymbol << " (suma=" << suma << ", n=" << N_POLITICA << ")\n";
     if (suma > N_POLITICA) {
-        // No ocurre con la semilla actual (suma maxima posible = 3+2+3+1=9
-        // solo si los tres modulos dieran su valor mas alto simultaneamente;
-        // se deja la salvaguarda explicita que exige el enunciado).
+      
         int exceso = suma - N_POLITICA;
         params.minLower = std::max(0, params.minLower - exceso);
         suma = params.minLower + params.minUpper + params.minDigit + params.minSymbol;
