@@ -104,7 +104,7 @@ void runBT(long long maxNodes) {
     for (int n = 4; n <= 7; ++n)
         barrido.push_back({"Barrido n=" + std::to_string(n), n, politicaCompleta});
 
-    std::ofstream csv("results_bt.csv");
+    std::ofstream csv("results/results_bt.csv");
     csv << "instancia,n,minLower,minUpper,minDigit,minSymbol,estado,"
            "nodos_visitados_con_poda,nodos_sin_poda,soluciones,"
            "tiempo_ms_con_poda,tiempo_ms_sin_poda,horas_estimadas_peor_caso\n";
@@ -124,5 +124,5 @@ void runBT(long long maxNodes) {
     }
 
     csv.close();
-    std::cout << "Resultados guardados en results_bt.csv\n";
+    std::cout << "Resultados guardados en results/results_bt.csv\n";
 }
