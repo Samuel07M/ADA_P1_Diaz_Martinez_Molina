@@ -23,7 +23,7 @@ const static word32 add_to_k[] = {
     0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
     0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
     0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef4a3f7, 0xc67178f2
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
 };
 
 class hash256_one_by_one {
@@ -37,14 +37,22 @@ public:
     }
     template <typename RaIt>
     void process(RaIt first, RaIt last) {
+        // OJO: `std::distance(first, last)` calculado DESPUES de este bucle
+        // siempre da 0, porque el bucle ya avanzo `first` hasta que quedo
+        // igual a `last` (esa era la condicion de parada). Con eso,
+        // data_length_ nunca se incrementaba y finish() terminaba
+        // codificando una longitud de 0 bits para cualquier entrada no
+        // vacia, corrompiendo el hash de todo mensaje no vacio (se
+        // detecto porque sha256Hex("abc") no coincidia con `sha256sum`).
+        // Se cuenta cada byte procesado dentro del propio bucle en su lugar.
         for (; first != last; ++first) {
             buffer_[buffer_length_++] = static_cast<byte>(*first);
+            ++data_length_;
             if (buffer_length_ == 64) {
                 transform();
                 buffer_length_ = 0;
             }
         }
-        data_length_ += std::distance(first, last);
     }
     void finish() {
         byte pack = 0x80;
@@ -55,8 +63,14 @@ public:
             buffer_length_ = 0;
         }
         while (buffer_length_ < 56) buffer_[buffer_length_++] = 0x00;
-        word32 bit_len = static_cast<word32>(data_length_ * 8);
-        for (int i = 7; i >= 0; --i) buffer_[56 + i] = static_cast<byte>(bit_len >> ((7 - i) * 8));
+        // El campo de longitud del padding de SHA-256 es de 64 bits
+        // (big-endian). Usar word32 (32 bits) aqui y desplazarlo hasta 56
+        // posiciones es comportamiento indefinido en C++ (desplazar un
+        // entero de 32 bits por >=32 posiciones) y corrompia el hash de
+        // cualquier entrada no vacia: se usa un entero de 64 bits para
+        // poder representar y desplazar la longitud completa sin UB.
+        unsigned long long bit_len = static_cast<unsigned long long>(data_length_) * 8ULL;
+        for (int i = 0; i < 8; ++i) buffer_[56 + i] = static_cast<byte>(bit_len >> ((7 - i) * 8));
         transform();
     }
     template <typename OutIt>
