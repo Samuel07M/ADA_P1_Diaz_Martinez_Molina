@@ -38,31 +38,30 @@ static Resultado correrInstancia(const std::vector<char>& alphabet, const Instan
 
 static void imprimir(const Resultado& r) {
     const auto& inst = r.inst;
-    std::cout << std::left << std::setw(30) << inst.nombre
-              << " n=" << inst.n
+              << " | n=" << inst.n
               << "  minL=" << inst.policy.minLower << " minU=" << inst.policy.minUpper
               << " minD=" << inst.policy.minDigit << " minS=" << inst.policy.minSymbol << "\n";
 
     if (r.conPoda.nodeLimitReached) {
-        std::cout << "  [NO TERMINO] nodos visitados hasta el limite: " << r.conPoda.nodesVisited
+        std::cout << "  [NO TERMINO] Nodos visitados hasta el limite: " << r.conPoda.nodesVisited
                   << " en " << std::fixed << std::setprecision(3) << r.conPoda.timeMs << " ms\n";
-        std::cout << "  Soluciones halladas (parcial, subestimado): " << r.conPoda.solutionsFound << "\n";
+        std::cout << "  Soluciones halladas (estimado): " << r.conPoda.solutionsFound << "\n";
         if (r.horasEstimadasPeorCaso >= 0)
             std::cout << "  Estimado peor caso para completar: " << std::fixed << std::setprecision(2)
-                      << r.horasEstimadasPeorCaso << " horas (cota superior, ver metodologia)\n";
+                      << r.horasEstimadasPeorCaso << " horas\n";
     } else {
-        std::cout << "  Nodos visitados (con poda, COMPLETO): " << r.conPoda.nodesVisited << "\n";
+        std::cout << "  Nodos visitados (con poda): " << r.conPoda.nodesVisited << "\n";
         std::cout << "  Soluciones encontradas: " << r.conPoda.solutionsFound << "\n";
         std::cout << "  Tiempo con poda: " << std::fixed << std::setprecision(3) << r.conPoda.timeMs << " ms\n";
         if (!r.sinPoda.exhaustiveSkipped) {
             double reduccion = 100.0 * (1.0 - (double)r.conPoda.nodesVisited / (double)r.sinPoda.nodesGenerated);
-            std::cout << "  Nodos sin poda (COMPLETO): " << r.sinPoda.nodesGenerated << "\n";
+            std::cout << "  Nodos sin poda (completo): " << r.sinPoda.nodesGenerated << "\n";
             std::cout << "  Reduccion del espacio: " << std::fixed << std::setprecision(2) << reduccion << "%\n";
             std::cout << "  Tiempo sin poda: " << std::fixed << std::setprecision(3) << r.sinPoda.timeMs << " ms\n";
             if (r.conPoda.solutionsFound != r.sinPoda.solutionsFound)
-                std::cout << "  *** ADVERTENCIA: soluciones no coinciden ***\n";
+                std::cout << "ADVERTENCIA: soluciones no coinciden\n";
         } else {
-            std::cout << "  Nodos sin poda (teorico, no ejecutado): " << r.sinPoda.nodesGenerated << "\n";
+            std::cout << "  Nodos sin poda (teorico): " << r.sinPoda.nodesGenerated << "\n";
         }
     }
     std::cout << "\n";
@@ -92,12 +91,12 @@ void runBT(long long maxNodes) {
     Policy sinRestricciones{0, 0, 0, 0, true};
 
     std::vector<Instancia> requeridas = {
-        {"Referencia (comun al curso)",       6,  Policy{2,1,1,1,true}},
-        {"(i) Politica completa",             8,  politicaCompleta},
-        {"(ii) Politica completa n=6",        6,  politicaCompleta},
-        {"(iii) Politica completa n=10",      10, politicaCompleta},
-        {"(iv) Politica relajada",            8,  politicaRelajada},
-        {"(v) Sin restricciones (poda nula)", 6,  sinRestricciones},
+        {"Referencia", 6, Policy{2,1,1,1,true}},
+        {"1. Politica completa", 8, politicaCompleta},
+        {"2. Politica completa n=6", 6, politicaCompleta},
+        {"3. Politica completa n=10", 10, politicaCompleta},
+        {"4. Politica relajada", 8, politicaRelajada},
+        {"5. Sin restricciones (poda nula)", 6, sinRestricciones},
     };
 
     std::vector<Instancia> barrido;
@@ -109,14 +108,14 @@ void runBT(long long maxNodes) {
            "nodos_visitados_con_poda,nodos_sin_poda,soluciones,"
            "tiempo_ms_con_poda,tiempo_ms_sin_poda,horas_estimadas_peor_caso\n";
 
-    std::cout << "=== BARRIDO SUPLEMENTARIO (curva empirica real) ===\n\n";
+    std::cout << "=== BARRIDO SUPLEMENTARIO ===\n\n";
     for (const auto& inst : barrido) {
         Resultado r = correrInstancia(alphabet, inst, maxNodes);
         imprimir(r);
         escribirCSV(csv, r);
     }
 
-    std::cout << "=== INSTANCIAS REQUERIDAS (Seccion 9.2) ===\n\n";
+    std::cout << "=== INSTANCIAS REQUERIDAS ===\n\n";
     for (const auto& inst : requeridas) {
         Resultado r = correrInstancia(alphabet, inst, maxNodes);
         imprimir(r);

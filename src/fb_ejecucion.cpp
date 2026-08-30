@@ -1,4 +1,4 @@
-#include "fb.hpp"
+#include "fb_fuerzabruta.hpp"
 #include <iostream>
 #include <iomanip>
 #include <vector>
