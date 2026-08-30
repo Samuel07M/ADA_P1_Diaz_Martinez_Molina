@@ -101,7 +101,7 @@ void runFB() {
         bool esA1 = (alfabetosPorInstancia[i] == A1);
 
         instancias.push_back(Instancia{
-            "Equipo-" + std::to_string(i + 1),
+            "Contraseña-" + std::to_string(i + 1),
             alfabetosPorInstancia[i],
             esA1 ? A1_MIN_LEN : A2_MIN_LEN,
             esA1 ? A1_MAX_LEN : A2_MAX_LEN,
