@@ -4,7 +4,7 @@ void runBT(long long maxNodes);
 void runFB();
 
 int main() {
-  int opcion;
+  int opcion = 1;
 
   while (opcion > 0 && opcion <= 2) {
     std::cout << "\n=== MENU DE EJECUCION ===\n";
