@@ -1,0 +1,11 @@
+instancia,n,minLower,minUpper,minDigit,minSymbol,estado,nodos_visitados_con_poda,nodos_sin_poda,soluciones,tiempo_ms_con_poda,tiempo_ms_sin_poda,horas_estimadas_peor_caso
+"Barrido n=4",4,2,1,1,1,completo,1,20456441,0,0.000714,247.192,-1
+"Barrido n=5",5,2,1,1,1,parcial,50000001,1370581548,45862064,1564.19,-1,0.0119103
+"Barrido n=6",6,2,1,1,1,parcial,50000001,91828963717,46087993,1454.03,-1,0.741791
+"Barrido n=7",7,2,1,1,1,parcial,50000001,6152540569040,46163863,1444.21,-1,49.3642
+"Referencia",6,2,1,1,1,parcial,50000001,91828963717,46087993,1445.99,-1,0.737689
+"1. Politica completa",8,2,1,1,1,parcial,50000001,412220218125681,46163862,1401.62,-1,3209.87
+"2. Politica completa n=6",6,2,1,1,1,parcial,50000001,91828963717,46087993,1410.58,-1,0.719621
+"3. Politica completa n=10",10,2,1,1,1,parcial,50000001,1850456559166182077,46163860,1400.68,-1,1.43994e+07
+"4. Politica relajada",8,1,0,0,0,parcial,50000001,412220218125681,49242418,611.489,-1,1400.38
+"5. Sin restricciones (poda nula)",6,0,0,0,0,parcial,50000001,91828963717,49242420,613.327,-1,0.312895

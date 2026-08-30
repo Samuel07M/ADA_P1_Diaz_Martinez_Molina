@@ -1,0 +1,32 @@
+=== Modulo FB - Fuerza Bruta ===
+Apellidos (orden alfabetico, sin tildes): diaz, martinez, molina
+Semilla del equipo: 1938
+
+Contraseñas objetivo generadas (sinteticas, propias del equipo):
+  Referencia: abc12  | hash: 8d51feb34e3e69f6fa6dffc577e2c60490cf9a7fcd835f9f6af1505b71d74773
+  Equipo-1: oxgb  | hash: 7cda3718748933817a918f2582ed75c960514038a4e0e1c62fe1bad899838cd2
+  Equipo-2: 0lav  | hash: 0cb1d27040ca3a19a265532a53223123afa82c7da11f7218a215636c7ebdd977
+  Equipo-3: krcxa  | hash: 16c8dfe88b88c2efe034da8128caf152dfbcbdf2242a01a4603ac1428d0fa877
+  Equipo-4: xi7st  | hash: b84cdd7ea9c66e61ea6f553c7dd52cff55b4ab802e0466c256427d040a8fed52
+  Equipo-5: ulorkn  | hash: 4072a744a236ec987f904e4d8a5fa68fde628d62a9572baa7fbb9d60dbc54e14
+
+Instancia     Metodo    Encontrada  Contraseña     Candidatos        Tiempo(ms)  
+----------------------------------------------------------------------------------
+Referencia    FB        SI          abc12           1776521           2442.913    
+Referencia    Dicc      NO          -               500               0.736       
+Equipo-1      FB        SI          oxgb            279346            382.273     
+Equipo-1      Dicc      NO          -               500               0.750       
+Equipo-2      FB        SI          0lav            1273990           1760.681    
+Equipo-2      Dicc      NO          -               500               0.712       
+Equipo-3      FB        SI          krcxa           5345055           7426.809    
+Equipo-3      Dicc      NO          -               500               0.701       
+Equipo-4      FB        SI          xi7st           40774124          55853.979   
+Equipo-4      Dicc      NO          -               500               0.752       
+Equipo-5      FB        SI          ulorkn          255268014         362174.681  
+Equipo-5      Dicc      NO          -               500               0.722       
+
+=== Resumen comparativo FB vs. Diccionario ===
+Total de instancias evaluadas: 6
+Fuerza bruta  -> encontradas: 6/6 | candidatos evaluados (suma): 304717050
+Diccionario   -> encontradas: 0/6 | candidatos evaluados (suma): 3000
+Resultados guardados en results/results_fb.csv y results/results_fb.txt
