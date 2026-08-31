@@ -47,31 +47,31 @@ static Resultado correrInstancia(const std::vector<char>& alphabet, const Instan
 
 static void imprimir(std::ostream& out, const Resultado& r) {
     const auto& inst = r.inst;
-    out << std::left << std::setw(34) << inst.nombre
-        << " n=" << inst.n
-        << "  minL=" << inst.policy.minLower << " minU=" << inst.policy.minUpper
+    out << inst.nombre
+        << " | n=" << inst.n
+        << " minL=" << inst.policy.minLower << " minU=" << inst.policy.minUpper
         << " minD=" << inst.policy.minDigit << " minS=" << inst.policy.minSymbol << "\n";
 
     if (r.conPoda.nodeLimitReached) {
         out << "  [NO TERMINO] Nodos visitados hasta el limite: " << r.conPoda.nodesVisited
             << " en " << std::fixed << std::setprecision(3) << r.conPoda.timeMs << " ms\n";
-        out << "  Soluciones halladas (parcial, subestimado): " << r.conPoda.solutionsFound << "\n";
+        out << "  Soluciones halladas (estimado): " << r.conPoda.solutionsFound << "\n";
         if (r.horasEstimadasPeorCaso >= 0)
             out << "  Estimado peor caso para completar: " << std::fixed << std::setprecision(2)
                 << r.horasEstimadasPeorCaso << " horas\n";
     } else {
-        out << "  Nodos visitados (con poda, COMPLETO): " << r.conPoda.nodesVisited << "\n";
+        out << "  Nodos visitados (con poda): " << r.conPoda.nodesVisited << "\n";
         out << "  Soluciones encontradas: " << r.conPoda.solutionsFound << "\n";
         out << "  Tiempo con poda: " << std::fixed << std::setprecision(3) << r.conPoda.timeMs << " ms\n";
         if (!r.sinPoda.exhaustiveSkipped) {
             double reduccion = 100.0 * (1.0 - (double)r.conPoda.nodesVisited / (double)r.sinPoda.nodesGenerated);
-            out << "  Nodos sin poda (COMPLETO): " << r.sinPoda.nodesGenerated << "\n";
+            out << "  Nodos sin poda (completo): " << r.sinPoda.nodesGenerated << "\n";
             out << "  Reduccion del espacio: " << std::fixed << std::setprecision(2) << reduccion << "%\n";
             out << "  Tiempo sin poda: " << std::fixed << std::setprecision(3) << r.sinPoda.timeMs << " ms\n";
             if (r.conPoda.solutionsFound != r.sinPoda.solutionsFound)
-                out << "  *** ADVERTENCIA: soluciones no coinciden ***\n";
+                out << "ADVERTENCIA: soluciones no coinciden\n";
         } else {
-            out << "  Nodos sin poda (teorico, no ejecutado): " << r.sinPoda.nodesGenerated << "\n";
+            out << "  Nodos sin poda (teorico): " << r.sinPoda.nodesGenerated << "\n";
         }
     }
     out << "\n";
@@ -91,10 +91,10 @@ static void escribirCSV(std::ofstream& csv, const Resultado& r) {
         << r.horasEstimadasPeorCaso << "\n";
 }
 
-}  // namespace (fin del namespace anonimo)
+}
 
 void runBT(long long maxNodes) {
-    std::ostringstream out;  // acumula todo lo impreso para volcarlo tambien a results/results_bt.txt
+    std::ostringstream out;
 
     std::vector<char> alphabet = buildAlphabet();
     out << "Apellidos (orden alfabetico, sin tildes): ";
@@ -112,9 +112,6 @@ void runBT(long long maxNodes) {
     out << "Tamano del alfabeto: " << alphabet.size() << " simbolos\n";
     out << "Limite de nodos por corrida: " << maxNodes << "\n\n";
 
-    // Parametros de la politica del equipo derivados de la semilla
-    // (Seccion 9.2): minLower = 2 + (semilla mod 3); minUpper = 1 +
-    // (semilla mod 2); minDigit = 1 + (semilla mod 3); minSymbol = 1.
     semilla::ParametrosPoliticaBT params = semilla::derivarPoliticaBT(SEMILLA);
     const int N_POLITICA = 8;
     int suma = params.minLower + params.minUpper + params.minDigit + params.minSymbol;

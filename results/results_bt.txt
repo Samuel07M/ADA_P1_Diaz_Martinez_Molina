@@ -7,59 +7,59 @@ Politica del equipo derivada de la semilla: minLower=2 minUpper=1 minDigit=1 min
 
 === BARRIDO SUPLEMENTARIO ===
 
-Barrido n=4                        n=4  minL=2 minU=1 minD=1 minS=1
-  Nodos visitados (con poda, COMPLETO): 1
+Barrido n=4 | n=4 minL=2 minU=1 minD=1 minS=1
+  Nodos visitados (con poda): 1
   Soluciones encontradas: 0
-  Tiempo con poda: 0.001 ms
-  Nodos sin poda (COMPLETO): 20456441
+  Tiempo con poda: 0.002 ms
+  Nodos sin poda (completo): 20456441
   Reduccion del espacio: 100.00%
-  Tiempo sin poda: 247.192 ms
+  Tiempo sin poda: 1260.609 ms
 
-Barrido n=5                        n=5  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1564.189 ms
-  Soluciones halladas (parcial, subestimado): 45862064
-  Estimado peor caso para completar: 0.01 horas
+Barrido n=5 | n=5 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 8189.795 ms
+  Soluciones halladas (estimado): 45862064
+  Estimado peor caso para completar: 0.06 horas
 
-Barrido n=6                        n=6  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1454.033 ms
-  Soluciones halladas (parcial, subestimado): 46087993
-  Estimado peor caso para completar: 0.74 horas
+Barrido n=6 | n=6 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7873.124 ms
+  Soluciones halladas (estimado): 46087993
+  Estimado peor caso para completar: 4.02 horas
 
-Barrido n=7                        n=7  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1444.208 ms
-  Soluciones halladas (parcial, subestimado): 46163863
-  Estimado peor caso para completar: 49.36 horas
+Barrido n=7 | n=7 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7777.121 ms
+  Soluciones halladas (estimado): 46163863
+  Estimado peor caso para completar: 265.83 horas
 
 === INSTANCIAS REQUERIDAS ===
 
-Referencia                         n=6  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1445.994 ms
-  Soluciones halladas (parcial, subestimado): 46087993
-  Estimado peor caso para completar: 0.74 horas
+Referencia | n=6 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7894.673 ms
+  Soluciones halladas (estimado): 46087993
+  Estimado peor caso para completar: 4.03 horas
 
-1. Politica completa               n=8  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1401.623 ms
-  Soluciones halladas (parcial, subestimado): 46163862
-  Estimado peor caso para completar: 3209.87 horas
+1. Politica completa | n=8 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7738.888 ms
+  Soluciones halladas (estimado): 46163862
+  Estimado peor caso para completar: 17722.92 horas
 
-2. Politica completa n=6           n=6  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1410.576 ms
-  Soluciones halladas (parcial, subestimado): 46087993
-  Estimado peor caso para completar: 0.72 horas
+2. Politica completa n=6 | n=6 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7812.378 ms
+  Soluciones halladas (estimado): 46087993
+  Estimado peor caso para completar: 3.99 horas
 
-3. Politica completa n=10          n=10  minL=2 minU=1 minD=1 minS=1
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 1400.676 ms
-  Soluciones halladas (parcial, subestimado): 46163860
-  Estimado peor caso para completar: 14399394.02 horas
+3. Politica completa n=10 | n=10 minL=2 minU=1 minD=1 minS=1
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 7785.225 ms
+  Soluciones halladas (estimado): 46163860
+  Estimado peor caso para completar: 80034561.48 horas
 
-4. Politica relajada               n=8  minL=1 minU=0 minD=0 minS=0
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 611.489 ms
-  Soluciones halladas (parcial, subestimado): 49242418
-  Estimado peor caso para completar: 1400.38 horas
+4. Politica relajada | n=8 minL=1 minU=0 minD=0 minS=0
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 3566.357 ms
+  Soluciones halladas (estimado): 49242418
+  Estimado peor caso para completar: 8167.36 horas
 
-5. Sin restricciones (poda nula)   n=6  minL=0 minU=0 minD=0 minS=0
-  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 613.327 ms
-  Soluciones halladas (parcial, subestimado): 49242420
-  Estimado peor caso para completar: 0.31 horas
+5. Sin restricciones (poda nula) | n=6 minL=0 minU=0 minD=0 minS=0
+  [NO TERMINO] Nodos visitados hasta el limite: 50000001 en 3605.162 ms
+  Soluciones halladas (estimado): 49242420
+  Estimado peor caso para completar: 1.84 horas
 
 Resultados guardados en results/results_bt.csv y results/results_bt.txt
