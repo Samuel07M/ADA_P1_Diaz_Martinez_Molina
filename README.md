@@ -85,11 +85,15 @@ g++ -std=c++17 -O2 -o bin/ada_p1 src/main.cpp src/fb_ejecucion.cpp src/fb_fuerza
 ## Ejecución
 
 El ejecutable asume que se corre **desde la raíz del repositorio** (usa
-rutas relativas `resources/diccionario.txt` y `results/...`) y muestra un
-menú interactivo:
+rutas relativas `resources/diccionario.txt` y `results/...`):
 
 ```bash
 ./bin/ada_p1
+```
+
+Se muestra este menú interactivo:
+
+```bash
 # === MENU DE EJECUCION ===
 # 0. Salir
 # 1. Fuerza Bruta
